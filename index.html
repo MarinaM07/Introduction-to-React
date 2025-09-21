@@ -16,37 +16,23 @@
   <script type="text/babel">
     const container = document.getElementById('root');
     const root = ReactDOM.createRoot(container);
-    root.render(<App />);
+    root.render(<App images={images} />);
 
-    function App() {
+    function App({images=[]}) {
+      const cards=images.map((item)=> (
+        <Card url={item.url}/>
+      ));      
       return (
         <section className="game container">
           <ul className="cards cards-theme-cars">
-            <li className="card card-show">
-              <img src="img/cats-1.jpg" width="204" height="144" alt="Котик" />
-            </li>
-            <Card url="img/cats-2.jpg"/>
-            <Card url="img/cats-3.jpg"/>
-            <Card url="img/cats-4.jpg"/>
-            <li className="card card-finished">
-              <img src="img/cats-5.jpg" width="204" height="144" alt="Котик" />
-            </li>
-            <li className="card card-show">
-              <img src="img/cats-6.jpg" width="204" height="144" alt="Котик" />
-            </li>
-            <Card url="img/cats-6.jpg"/>
-            <li className="card card-finished">
-              <img src="img/cats-5.jpg" width="204" height="144" alt="Котик" />
-            </li>
-            <Card url="img/cats-4.jpg"/>
-            <Card url="img/cats-3.jpg"/>
-            <Card url="img/cats-2.jpg"/>            
-            <Card url="img/cats-1.jpg"/>
+            {images}
           </ul>
         </section>);
     }
 
     function Card({url}) {
+      const className = `card ${isShow ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
+
       return (
         <li className="card">
           <img src={url} width="204" height="144" alt="Котик" />
